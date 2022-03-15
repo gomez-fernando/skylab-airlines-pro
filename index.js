@@ -37,7 +37,7 @@ const average = (array) => {
 }
 
 const showFlights = () => {
-  console.log("Admin dashboard:\nLista actualizada de vuelos:\n")
+  console.log("\nLista actualizada de vuelos:\n")
 
   for (let i = 0; i < flights.length; i++) {
     (flights[i].scale)
@@ -239,13 +239,29 @@ const buy = () => {
         return x.id;
       })
   
-      let idtoBuy = ids.indexOf(toBuy);
+      let idToBuy = ids.indexOf(toBuy);
 
-      if(idtoBuy === -1) {
+      if(idToBuy === -1) {
         toBuy = null;
         alert("El id introducido no existe.");
       } else{
-        alert("La compra se ha realizado correctamente.\nGracias !!");
+
+        (flights[idToBuy].scale)
+          ? scale = "Sí"
+          : scale = "No";
+
+          console.info(`------------------->\nEstos son los detalles de tu vuelo:\nID: ${flights[idToBuy].id} | Origen: ${flights[idToBuy].from} | Destino: ${flights[idToBuy].to} | Coste: ${flights[idToBuy].cost} | Escala: ${scale}`);
+
+        flights.splice(idToBuy, 1);
+
+          console.log("------------------->");
+
+          showFlights();
+
+        alert("La compra se ha realizado correctamente.\nPuedes ver en la consola los detalles de tu vuelo y la lista actualizada de vuelos disponibles.\nGracias por volar con nosotros !!");
+
+
+        user();
       }
     }
     
