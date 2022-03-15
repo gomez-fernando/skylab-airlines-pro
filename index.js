@@ -2,7 +2,6 @@ let name;
 let scale = "";
 let choice;
 let toDrop;
-var flights2 = [];
 var flights = [
 
   { id: 00, to: 'Bilbao', from: 'Barcelona', cost: 1600, scale: false },
@@ -28,6 +27,7 @@ var flights = [
   { id: 10, to: 'Tel-Aviv', from: 'Madrid', cost: 150, scale: false }
 ];
 
+// function to get the average of flights prices
 const average = (array) => {
   let sum = 0;
   for (let i = 0; i < array.length; i++){ 
@@ -36,6 +36,7 @@ const average = (array) => {
   return ((sum / array.length).toFixed(2));
 }
 
+// function to show in the console the list of flights
 const showFlights = () => {
   console.log("\nLista actualizada de vuelos:\n")
 
@@ -47,6 +48,7 @@ const showFlights = () => {
   }
 }
 
+// function to show the Admin's menu
 const admin = () => {
   do {
     choice = prompt(`Menú:
@@ -82,6 +84,7 @@ Borre algún vuelo para poder añadir más.`);
   } while (choice !== '1' && choice !== '2' && choice !== '3');
 }
 
+// function to create a new flight
 const create = () => {
   let newFlight = {id : undefined, to: "", from: "", cost: undefined, scale: undefined};
   
@@ -136,6 +139,7 @@ const create = () => {
   admin();
 }
 
+// funciton to delete a flight
 const drop = () => {
   do {
     toDrop = prompt(`Indica el id del vuelo que quieres borrar:`);
@@ -163,10 +167,12 @@ const drop = () => {
   } while (toDrop === null || toDrop === "");
 }
 
+// function to close the program
 const close = () => {
   alert("Has cerrado sesión.\nBye !");
 }
 
+// function to show the user's menu
 const user = () => {
   do {
     choice = prompt(`Menú:
@@ -195,6 +201,7 @@ Elige una opción indicando el número:
   } while (choice !== '1' && choice !== '2' && choice !== '3');
 }
 
+// function to search flight by max price
 const search = () => {
   let maxPrice = "";
   let maxPFlights = [];
@@ -228,6 +235,7 @@ const search = () => {
   user();
 }
 
+// function to let a user buy a flight
 const buy = () => {
   do {
     toBuy = prompt(`Indica el id del vuelo que quieres comprar:`);
@@ -268,6 +276,7 @@ const buy = () => {
   } while (toBuy === null || toBuy === "");
 }
 
+// main function of the app
 const airline = () => {
   do {
     name = prompt(`Bienvenido/a a SkyLab Airlines !!
