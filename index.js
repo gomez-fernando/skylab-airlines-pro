@@ -151,7 +151,7 @@ const drop = () => {
       toDrop = null;
       alert("El id introducido no existe.");
     } else{
-      flights2 = flights.splice(idToDrop, 1);
+      flights.splice(idToDrop, 1);
 
       showFlights();
 
@@ -252,7 +252,7 @@ const buy = () => {
 
           console.info(`------------------->\nEstos son los detalles de tu vuelo:\nID: ${flights[idToBuy].id} | Origen: ${flights[idToBuy].from} | Destino: ${flights[idToBuy].to} | Coste: ${flights[idToBuy].cost} | Escala: ${scale}`);
 
-        flights.splice(idToBuy, 1);
+          flights.splice(idToBuy, 1);
 
           console.log("------------------->");
 
