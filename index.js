@@ -5,7 +5,7 @@ let toDrop;
 var flights2 = [];
 var flights = [
 
-  // { id: 00, to: 'Bilbao', from: 'Barcelona', cost: 1600, scale: false },
+  { id: 00, to: 'Bilbao', from: 'Barcelona', cost: 1600, scale: false },
 
   { id: 01, to: 'New York', from: 'Barcelona', cost: 700, scale: false },
 
@@ -57,8 +57,15 @@ Elige una opción indicando el número:
 
     switch (choice) {
       case '1':
-        create();
-        break;
+        if(flights.length >= 15){
+          alert(`El límite de 15 vuelos ha sido alcanzado.
+Borre algún vuelo para poder añadir más.`);
+          choice = null;
+          break;
+        } else {
+          create();
+          break;
+        }
 
       case '2':
         drop();
@@ -129,8 +136,6 @@ const create = () => {
   admin();
 }
 
-// TODO limitar a 14 los vuelos en el array
-
 const drop = () => {
   do {
     toDrop = prompt(`Indica el id del vuelo que quieres borrar:`);
@@ -163,7 +168,88 @@ const close = () => {
 }
 
 const user = () => {
-  alert("hola user")
+  do {
+    choice = prompt(`Menú:
+Elige una opción indicando el número:
+1: Buscar por precio máximo
+2: Comprar vuelo
+3: Cerrar programa`);
+
+    switch (choice) {
+      case '1':
+        search();
+        break;
+
+      case '2':
+        buy();
+        break;
+
+      case '3':
+        close();
+        break;
+
+      default :
+        choice = null;
+        break;
+    }
+  } while (choice !== '1' && choice !== '2' && choice !== '3');
+}
+
+const search = () => {
+  let maxPrice = "";
+  let maxPFlights = [];
+  
+  do {
+    maxPrice = prompt(`Ingresa el precio máximo que quieras buscar para tu vuelo.`);
+
+    maxPFlights = flights.filter(function (flight){
+      return flight.cost <= maxPrice;
+    });
+
+  } while (maxPrice === null || maxPrice === "" || isNaN(maxPrice));
+
+  console.log("******************\n");
+  console.info(`Estos son los vuelos con precio máximo de $ ${maxPrice}: \n\n`);
+    for (let i = 0; i < maxPFlights.length; i++) {
+      (maxPFlights[i].scale)
+        ? scale = "Sí"
+        : scale = "No";
+      console.log(`ID: ${maxPFlights[i].id} | Origen: ${maxPFlights[i].from} | Destino: ${maxPFlights[i].to} | Coste: ${maxPFlights[i].cost} | Escala: ${scale}`);
+    }
+
+  if(maxPFlights.length > 1){
+    alert(`Se han encontrado ${maxPFlights.length} vuelos.\nPuedes consultar la lista en la consola.`);
+  } else if(maxPFlights.length === 1){
+    alert(`Se ha encontrado ${maxPFlights.length} vuelo.\nPuedes consultarlo en la consola.`);
+  } else{
+    alert(`No se han encontrado vuelos con ese precio o menor.`);
+  }
+
+  user();
+}
+
+const buy = () => {
+  do {
+    toBuy = prompt(`Indica el id del vuelo que quieres comprar:`);
+
+    if(toBuy !== null && toBuy !== ""){
+      toBuy = parseFloat(toBuy);
+
+      let ids = flights.map( x => {
+        return x.id;
+      })
+  
+      let idtoBuy = ids.indexOf(toBuy);
+
+      if(idtoBuy === -1) {
+        toBuy = null;
+        alert("El id introducido no existe.");
+      } else{
+        alert("La compra se ha realizado correctamente.\nGracias !!");
+      }
+    }
+    
+  } while (toBuy === null || toBuy === "");
 }
 
 const airline = () => {
@@ -225,7 +311,5 @@ Indica si eres ADMIN o USER`);
 
   } while (role === null || role === "");
 }
-
-
 
 airline();
