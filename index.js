@@ -276,7 +276,7 @@ const buy = () => {
   } while (toBuy === null || toBuy === "");
 }
 
-// main function of the app
+// App's main function
 const airline = () => {
   do {
     name = prompt(`Bienvenido/a a SkyLab Airlines !!
